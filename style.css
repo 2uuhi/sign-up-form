@@ -1,0 +1,174 @@
+@font-face {
+    font-family: 'roboto_monoregular';
+    src: url('robotomono-variablefont_wght-webfont.woff2') format('woff2'),
+         url('robotomono-variablefont_wght-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root {
+  --bg-color: #FBF9F8;
+  --primary-color: #0C4AE4;
+  --subtext-color: rgb(0 0 0 / 70%);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  font-family: 'roboto_monoregular', monospace;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  display: flex;
+}
+
+label {
+  display: block;
+}
+
+/* absolute positioning */
+
+.logo {
+  position: absolute;
+  width: 60px;
+  height: auto;
+  top: 20px;
+  left: 20px;
+}
+
+.author-note {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  font-size: 0.8em;
+  color: var(--primary-color);
+
+  /* padding: 5px;
+  background-color: rgb(0 0 0 / 25%); */
+}
+
+/* divs */
+
+.side-image {
+  width: 60%;
+
+  /* background */
+  background-image: url(chronoir.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.sign-up-container {
+  width: 40%;
+  padding: 60px;
+ 
+  background-color: var(--bg-color);
+}
+
+.button-container {
+  align-items: center;
+}
+
+/* form styling */
+h1 {
+  font-size: 2em;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+}
+
+div p {
+  margin-bottom: 20px;
+}
+
+.subtext {
+  font-size: 0.8em;
+  color: var(--subtext-color);
+}
+
+button {
+  width: 40%;
+  font-family: inherit;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  transition: transform 0.2s ease-in-out;
+}
+
+button:hover {
+  background-color: rgb(12 74 228 / 90%);
+  transform: scale(1.04);
+}
+
+form input {
+  font-family: inherit;
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 0.8px solid rgb(0 0 0 / 25%);
+}
+
+form input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+form label::after {
+  content: "(required)";
+  font-size: 0.8em;
+  color: var(--subtext-color);
+  margin-left: 5px;
+}
+
+input[type="password"]:user-invalid {
+  /* In a perfect world, this should be red. */
+  box-shadow: 0 0 2px 1px red;
+}
+
+/* if we use ~ instead of +, the icon will show up for the next input + icon as well,
+but because that input is not user inputted yet, the above style won't apply and we don't want that */
+input[type="password"]:user-invalid + .icon::after { 
+  content: "❌";
+  font-size: small;
+  position: absolute;
+  right: 35px;
+  transform: translateY(8px);
+}
+
+/* Password match styling */
+.password-match {
+  box-shadow: 0 0 2px 1px green;
+}
+
+.password-match ~ .icon::after {
+  content: "✅";
+  font-size: small;
+  position: absolute;
+  right: 35px;
+  transform: translateY(8px);
+}
+
+.password-mismatch {
+  box-shadow: 0 0 2px 1px red;
+}
+
+.password-mismatch ~ .icon::after {
+  content: "❌";
+  font-size: small;
+  position: absolute;
+  right: 35px;
+  transform: translateY(8px);
+}
+
