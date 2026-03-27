@@ -10,18 +10,20 @@
   --bg-color: #FBF9F8;
   --primary-color: #0C4AE4;
   --subtext-color: rgb(0 0 0 / 70%);
+  --shadow-red: 0 0 2px 1px red;       
+  --shadow-green: 0 0 2px 1px green;
 }
 
 * {
   box-sizing: border-box;
   margin: 0;
+  font-family: inherit;
 }
 
 body {
   font-family: 'roboto_monoregular', monospace;
   height: 100vh;
   width: 100vw;
-  margin: 0;
   display: flex;
 }
 
@@ -29,8 +31,7 @@ label {
   display: block;
 }
 
-/* absolute positioning */
-
+/* --- absolute positioning --- */
 .logo {
   position: absolute;
   width: 60px;
@@ -50,16 +51,16 @@ label {
   background-color: rgb(0 0 0 / 25%); */
 }
 
-/* divs */
-
+/* --- layout --- */
 .side-image {
   width: 60%;
 
   /* background */
-  background-image: url(chronoir.jpg);
+  /* background-image: url(chronoir.jpg);
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center;
+  background-position: center; */
+  background: url(chronoir.jpg) no-repeat center / cover; 
 }
 
 .container {
@@ -79,7 +80,7 @@ label {
   align-items: center;
 }
 
-/* form styling */
+/* --- typography --- */
 h1 {
   font-size: 2em;
   color: var(--primary-color);
@@ -95,9 +96,9 @@ div p {
   color: var(--subtext-color);
 }
 
+/* --- button styling --- */
 button {
   width: 40%;
-  font-family: inherit;
   background-color: var(--primary-color);
   color: white;
   border: none;
@@ -112,8 +113,8 @@ button:hover {
   transform: scale(1.04);
 }
 
+/* --- form styling --- */
 form input {
-  font-family: inherit;
   width: 100%;
   padding: 8px;
   margin-bottom: 15px;
@@ -125,50 +126,38 @@ form input:focus {
   border-color: var(--primary-color);
 }
 
-form label::after {
+label.required::after {
   content: "(required)";
   font-size: 0.8em;
   color: var(--subtext-color);
   margin-left: 5px;
 }
 
-input[type="password"]:user-invalid {
-  /* In a perfect world, this should be red. */
-  box-shadow: 0 0 2px 1px red;
+/* --- password validation icons --- */
+.icon::after {                          
+  font-size: small;
+  position: absolute;
+  right: 35px;
+  transform: translateY(8px);
 }
 
 /* if we use ~ instead of +, the icon will show up for the next input + icon as well,
 but because that input is not user inputted yet, the above style won't apply and we don't want that */
-input[type="password"]:user-invalid + .icon::after { 
+input[type="password"]:user-invalid + .icon::after,
+.password-mismatch + .icon::after {     
   content: "❌";
-  font-size: small;
-  position: absolute;
-  right: 35px;
-  transform: translateY(8px);
 }
 
-/* Password match styling */
-.password-match {
-  box-shadow: 0 0 2px 1px green;
-}
-
-.password-match ~ .icon::after {
+.password-match + .icon::after {
   content: "✅";
-  font-size: small;
-  position: absolute;
-  right: 35px;
-  transform: translateY(8px);
 }
 
-.password-mismatch {
-  box-shadow: 0 0 2px 1px red;
+/* --- password validation states --- */
+input[type="password"]:user-invalid,
+.password-mismatch {                    
+  box-shadow: var(--shadow-red);
 }
 
-.password-mismatch ~ .icon::after {
-  content: "❌";
-  font-size: small;
-  position: absolute;
-  right: 35px;
-  transform: translateY(8px);
+.password-match {
+  box-shadow: var(--shadow-green);
 }
-

@@ -17,17 +17,17 @@
   <div class="container sign-up-container">
     <h1>/ Sign Up</h1>
     <form action="#" method="post">
-      <label for="full-name">Full Name</label>
+      <label for="full-name" class="required">Full Name</label>
       <input type="text" id="full-name" name="full-name" required>
 
-      <label for="email">Email</label>
+      <label for="email" class="required">Email</label>
       <input type="email" id="email" name="email" required>
 
-      <label for="password">Password</label>
+      <label for="password" class="required">Password</label>
       <input type="password" id="password" name="password" minlength="8" required>
       <span class="icon"></span>
 
-      <label for="confirm-password">Confirm Password</label>
+      <label for="confirm-password" class="required">Confirm Password</label>
       <input type="password" id="confirm-password" name="confirm-password" minlength="8" required>
       <span class="icon"></span>
 
@@ -39,40 +39,40 @@
       </div>
     </form>
   </div> 
+
+  <!-- Script should be placed at the end of the body -->
+  <script> 
+    // Password validation
+    const passwordInput = document.getElementById("password");
+    const confirmPasswordInput = document.getElementById("confirm-password");
+
+    confirmPasswordInput.addEventListener("input", () => {
+      if (confirmPasswordInput.value === passwordInput.value) {
+        confirmPasswordInput.classList.remove("password-mismatch");
+        confirmPasswordInput.classList.add("password-match");
+      } else {
+        confirmPasswordInput.classList.remove("password-match");
+        confirmPasswordInput.classList.add("password-mismatch");
+      }
+    });
+    // Bug01: Does not work if user changes the password after confirming it.
+
+    // Form submission
+    const form = document.querySelector("form");
+    form.addEventListener("submit", (event) => {
+      event.preventDefault(); // Prevent form submission for demonstration
+
+      // Check if passwords match before allowing submission for measures against Bug01 for now
+      if (confirmPasswordInput.value === passwordInput.value) {
+        confirmPasswordInput.classList.remove("password-mismatch");
+        confirmPasswordInput.classList.add("password-match");
+      } else {
+        confirmPasswordInput.classList.remove("password-match");
+        confirmPasswordInput.classList.add("password-mismatch");
+      }
+    });
+  </script>
 </body>
-
-<script>
-  // Password validation
-  const passwordInput = document.getElementById("password");
-  const confirmPasswordInput = document.getElementById("confirm-password");
-
-  confirmPasswordInput.addEventListener("input", () => {
-    if (confirmPasswordInput.value === passwordInput.value) {
-      confirmPasswordInput.classList.remove("password-mismatch");
-      confirmPasswordInput.classList.add("password-match");
-    } else {
-      confirmPasswordInput.classList.remove("password-match");
-      confirmPasswordInput.classList.add("password-mismatch");
-    }
-  });
-  // Bug01: Does not work if user changes the password after confirming it.
-
-  // Button submission
-  const submitButton = document.getElementById("submitButton");
-  submitButton.addEventListener("click", (event) => {
-    event.preventDefault(); // Prevent form submission for demonstration
-
-    // Check if passwords match before allowing submission for measures against Bug01 for now
-    if (confirmPasswordInput.value === passwordInput.value) {
-      confirmPasswordInput.classList.remove("password-mismatch");
-      confirmPasswordInput.classList.add("password-match");
-    } else {
-      confirmPasswordInput.classList.remove("password-match");
-      confirmPasswordInput.classList.add("password-mismatch");
-    }
-  });
-</script>
-
 </html>
 
 
